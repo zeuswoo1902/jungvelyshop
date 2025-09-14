@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jungvely Shop</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background-color: #fdf6f0; /* beige */
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #f8d7da; /* soft pink */
+      padding: 20px;
+    }
+    h1 {
+      margin: 0;
+    }
+    .product-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      width: 90%;
+      margin: auto;
+    }
+    .product-box {
+      background-color: #e0f7fa; /* soft blue */
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .product-box h3 {
+      margin: 0 0 10px;
+    }
+    button {
+      background-color: #f8d7da;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: Georgia;
+      margin: 2px;
+    }
+    button:hover {
+      background-color: #fff3e0;
+    }
+    #cart {
+      margin: 30px auto;
+      width: 70%;
+      text-align: left;
+      background: #fff3e0;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    #cart ul {
+      list-style: none;
+      padding: 0;
+    }
+    #cart li {
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Jungvely Shop by JungvelyINA</h1>
+  </header>
+
+  <div class="product-container">
+    <div class="product-box">
+      <h3>Mini Cahol</h3>
+      <p>IDR 20,724</p>
+      <button onclick="addToCart('Mini Cahol', 20724)">Add</button>
+    </div>
+    <div class="product-box">
+      <h3>JungP Pin</h3>
+      <p>IDR 19,298</p>
+      <button onclick="addToCart('JungP Pin', 19298)">Add</button>
+    </div>
+    <div class="product-box">
+      <h3>Jungvely Lucky Zip</h3>
+      <p>IDR 77,016</p>
+      <button onclick="addToCart('Jungvely Lucky Zip', 77016)">Add</button>
+    </div>
+    <div class="product-box">
+      <h3>Folded Bag</h3>
+      <p>IDR 41,817</p>
+      <button onclick="addToCart('Folded Bag', 41817)">Add</button>
+    </div>
+    <div class="product-box">
+      <h3>Lanyard</h3>
+      <p>IDR 18,218</p>
+      <button onclick="addToCart('Lanyard', 18218)">Add</button>
+    </div>
+    <div class="product-box">
+      <h3>Carabiner</h3>
+      <p>IDR 41,723</p>
+      <button onclick="addToCart('Carabiner', 41723)">Add</button>
+    </div>
+    <div class="product-box">
+      <h3>Blue Tumbler</h3>
+      <p>IDR 89,291</p>
+      <button onclick="addToCart('Blue Tumbler', 89291)">Add</button>
+    </div>
+    <div class="product-box">
+      <h3>Pink Tumbler</h3>
+      <p>IDR 89,291</p>
+      <button onclick="addToCart('Pink Tumbler', 89291)">Add</button>
+    </div>
+    <div class="product-box">
+      <h3>Busydog</h3>
+      <p>IDR 255,000</p>
+      <button onclick="addToCart('Busydog', 255000)">Add</button>
+    </div>
+  </div>
+
+  <div id="cart">
+    <h2>Shopping List</h2>
+    <ul id="cartItems"></ul>
+    <h3>Total: IDR <span id="total">0</span></h3>
+  </div>
+
+  <script>
+    let total = 0;
+    let cart = [];
+
+    function addToCart(item, price) {
+      cart.push({ item, price });
+      total += price;
+      renderCart();
+    }
+
+    function removeFromCart(index) {
+      total -= cart[index].price;
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById('cartItems');
+      cartItems.innerHTML = '';
+      cart.forEach((c, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${c.item} - IDR ${c.price.toLocaleString()} <button onclick="removeFromCart(${index})">Remove</button>`;
+        cartItems.appendChild(li);
+      });
+      document.getElementById('total').textContent = total.toLocaleString();
+    }
+  </script>
+</body>
+</html>
